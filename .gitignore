@@ -10,6 +10,7 @@ kitty/dank-theme.conf
 
 # Matugen generated outputs — recreated on wallpaper change
 fastfetch/config.jsonc
+starship/starship.toml
 
 # Matugen output cache
 ~/.cache/DankMaterialShell/
