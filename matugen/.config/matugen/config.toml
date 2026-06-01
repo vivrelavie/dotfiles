@@ -1,0 +1,13 @@
+[config]
+
+[templates.niri-focus]
+input_path = "/home/stef/.config/matugen/templates/niri-focus.kdl"
+output_path = "/home/stef/.cache/DankMaterialShell/niri-focus.kdl"
+
+[templates.fastfetch]
+input_path = "/home/stef/.config/matugen/templates/fastfetch.jsonc"
+output_path = "/home/stef/.config/fastfetch/config.jsonc"
+
+[templates.starship]
+input_path = "/home/stef/.config/matugen/templates/starship.toml"
+output_path = "/home/stef/.config/starship/starship.toml"
