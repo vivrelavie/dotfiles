@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+
+# DMS generated files — recreated from wallpaper automatically
+**/current-theme.conf
+DankMaterialShell/firefox.css
+DankMaterialShell/zen.css
+kitty/dank-tabs.conf
+kitty/dank-theme.conf
+
+# Matugen generated outputs — recreated on wallpaper change
+fastfetch/config.jsonc
+
+# Matugen output cache
+~/.cache/DankMaterialShell/
+
+# Niri — DMS backups and generated splits
+niri/config.kdl.backup*
+niri/config.kdl.dmsbackup*
+niri/dms/
+
+# DMS plugins repository
+DankMaterialShell/.config/DankMaterialShell/plugins/.repos/

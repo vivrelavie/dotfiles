@@ -1,0 +1,186 @@
+# Preset from:
+# https://starship.rs/presets/pastel-powerline
+
+"$schema" = 'https://starship.rs/config-schema.json'
+palette = "matugen"
+
+format = """
+[](color5)\
+$username\
+[](fg:color5 bg:color6)\
+$directory\
+[](fg:color6 bg:color12)\
+$git_branch\
+$git_status\
+[](fg:color12 bg:color6)\
+$c\
+$elixir\
+$elm\
+$golang\
+$gradle\
+$haskell\
+$java\
+$julia\
+$maven\
+$nodejs\
+$bun\
+$nim\
+$rust\
+$scala\
+[](fg:color6 bg:color13)\
+$docker_context\
+[](fg:color13 bg:color15)\
+$time\
+[ ](fg:color15)\
+"""
+
+# Disable the blank line at the start of the prompt
+# add_newline = false
+
+# You can also replace your username with a neat symbol like   or disable this
+# and use the os module below
+[username]
+show_always = true
+style_user = "fg:color7 bg:color5"
+style_root = "fg:color7 bg:color5"
+format = '[₊˚⊹♡ ᓚ₍ ^. .^₎  ]($style)'
+disabled = false
+
+# An alternative to the username module which displays a symbol that
+# represents the current operating system
+[os]
+style = "fg:color7 bg:color5"
+disabled = true # Disabled by default
+
+[directory]
+style = "fg:color5 bg:color6"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+# Here is how you can shorten some long paths by text replacement
+# similar to mapped_locations in Oh My Posh:
+[directory.substitutions]
+"~" = " "
+"Documents" = " 󰈙 "
+"Downloads" = "  "
+"Music" = "  "
+"Pictures" = "  "
+# Keep in mind that the order matters. For example:
+# "Important Documents" = " 󰈙 "
+# will not be replaced, because "Documents" was already substituted before.
+# So either put "Important Documents" before "Documents" or use the substituted version:
+# "Important 󰈙 " = " 󰈙 "
+
+[c]
+symbol = " "
+style = "fg:color5 bg:color6"
+format = '[ $symbol ($version) ]($style)'
+
+[cpp]
+symbol = " "
+style = "fg:color5 bg:color6"
+format = '[ $symbol ($version) ]($style)'
+
+[docker_context]
+symbol = " "
+style = "fg:color5 bg:color6"
+format = '[ $symbol $context ]($style)'
+
+[elixir]
+symbol = " "
+style = "fg:color5 bg:color6"
+format = '[ $symbol ($version) ]($style)'
+
+[elm]
+symbol = " "
+style = "fg:color5 bg:color6"
+format = '[ $symbol ($version) ]($style)'
+
+[git_branch]
+symbol = ""
+style = "fg:color7 bg:color12"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "fg:color7 bg:color12"
+format = '[$all_status$ahead_behind ]($style)'
+
+[golang]
+symbol = " "
+style = "fg:color5 bg:color6"
+format = '[ $symbol ($version) ]($style)'
+
+[gradle]
+style = "fg:color5 bg:color6"
+format = '[ $symbol ($version) ]($style)'
+
+[haskell]
+symbol = " "
+style = "fg:color5 bg:color6"
+format = '[ $symbol ($version) ]($style)'
+
+[java]
+symbol = " "
+style = "fg:color5 bg:color6"
+format = '[ $symbol ($version) ]($style)'
+
+[julia]
+symbol = " "
+style = "fg:color5 bg:color6"
+format = '[ $symbol ($version) ]($style)'
+
+[maven]
+style = "fg:color5 bg:color6"
+format = '[ $symbol ($version) ]($style)'
+
+[nodejs]
+symbol = ""
+style = "fg:color5 bg:color6"
+format = '[ $symbol ($version) ]($style)'
+
+[bun]
+symbol = ""
+style = "fg:color5 bg:color6"
+format = '[ $symbol ($version) ]($style)'
+
+[nim]
+symbol = "󰆥 "
+style = "fg:color5 bg:color6"
+format = '[ $symbol ($version) ]($style)'
+
+[rust]
+symbol = ""
+style = "fg:color5 bg:color6"
+format = '[ $symbol ($version) ]($style)'
+
+[scala]
+symbol = " "
+style = "fg:color5 bg:color6"
+format = '[ $symbol ($version) ]($style)'
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "fg:color5 bg:color15"
+format = '[ 󰣐 $time ]($style)'
+
+# ── Colors ───────────────────────────────────────────────────────────────────
+
+[palettes.matugen]
+color0  = "#171216"
+color1  = "#ff7282"
+color2  = "#9bed76"
+color3  = "#ffde72"
+color4  = "#e1a0de"
+color5  = "#6d3d6c"
+color6  = "#edb4eb"
+color7  = "#f8e9f8"
+color8  = "#9a8e99"
+color9  = "#ff9faa"
+color10 = "#c1ffa5"
+color11 = "#ffeaa5"
+color12 = "#ffcafd"
+color13 = "#ffd4fd"
+color14 = "#ffe3fe"
+color15 = "#fff8fe"
