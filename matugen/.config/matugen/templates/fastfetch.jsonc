@@ -7,7 +7,7 @@
             "left": 2,
             "right": 2
         },
-        "color": {"1": "#edb4eb"}
+        "color": {"1": "{{colors.primary.default.hex}}"}
     },
     "display": {
         "separator": "  "
@@ -17,84 +17,84 @@
         {
           "type": "title",
           "key": "",
-          "keyColor": "#edb4eb"
+          "keyColor": "{{colors.primary.default.hex}}"
         },
         {
           "type": "disk",
           "key": "󱦟 OS Age",
           "folders": "/",
-          "keyColor": "#edb4eb",
+          "keyColor": "{{colors.primary.default.hex}}",
           "format": "{days} days"
         },
         "break",
         {
             "type": "os",
             "key": "󰣇 os",
-            "keyColor": "#edb4eb"
+            "keyColor": "{{colors.primary.default.hex}}"
         },
         {
             "type": "kernel",
             "key": "󰘚 kr",
-            "keyColor": "#edb4eb"
+            "keyColor": "{{colors.primary.default.hex}}"
         },
         {
             "type": "packages",
             "key": "󰏖 pk",
-            "keyColor": "#edb4eb"
+            "keyColor": "{{colors.primary.default.hex}}"
         },
         {
             "type": "shell",
             "key": "󰆍 sh",
-            "keyColor": "#edb4eb"
+            "keyColor": "{{colors.primary.default.hex}}"
         },
         "break",
         {
             "type": "wm",
             "key": "󰖲 wm",
-            "keyColor": "#d8bfd4"
+            "keyColor": "{{colors.secondary.default.hex}}"
         },
         {
             "type": "terminal",
             "key": "󰗚 tm",
-            "keyColor": "#d8bfd4"
+            "keyColor": "{{colors.secondary.default.hex}}"
         },
         {
             "type": "terminalfont",
             "key": "󰛖 ft",
-            "keyColor": "#d8bfd4"
+            "keyColor": "{{colors.secondary.default.hex}}"
         },
         "break",
         {
             "type": "host",
             "key": "󰌢 hw",
-            "keyColor": "#f6b8ab"
+            "keyColor": "{{colors.tertiary.default.hex}}"
         },
         {
             "type": "cpu",
             "key": "󰻠 cp",
-            "keyColor": "#f6b8ab"
+            "keyColor": "{{colors.tertiary.default.hex}}"
         },
         {
             "type": "gpu",
             "key": "󰻑 gp",
             "format": "{2}",
-            "keyColor": "#f6b8ab"
+            "keyColor": "{{colors.tertiary.default.hex}}"
         },
         {
             "type": "memory",
             "key": "󰾆 mm",
-            "keyColor": "#f6b8ab"
+            "keyColor": "{{colors.tertiary.default.hex}}"
         },
         {
             "type": "display",
             "key": "󰍹 dp",
-            "keyColor": "#f6b8ab",
+            "keyColor": "{{colors.tertiary.default.hex}}",
             "compactType": "original-with-refresh-rate"
         },
         {
             "type": "uptime",
             "key": "󰅐 up",
-            "keyColor": "#f6b8ab"
+            "keyColor": "{{colors.tertiary.default.hex}}"
         },
         "break",
         {

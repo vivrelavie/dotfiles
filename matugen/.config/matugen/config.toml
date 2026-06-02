@@ -10,4 +10,4 @@ output_path = "/home/stef/.config/fastfetch/config.jsonc"
 
 [templates.starship]
 input_path = "/home/stef/.config/matugen/templates/starship.toml"
-output_path = "/home/stef/.config/starship/starship.toml"
+output_path = "/home/stef/.cache/matugen/starship.toml"

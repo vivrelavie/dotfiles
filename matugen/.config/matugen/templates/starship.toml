@@ -11,7 +11,7 @@ $directory\
 [](fg:color6 bg:color12)\
 $git_branch\
 $git_status\
-[](fg:color12 bg:color6)\
+[](fg:color12 bg:color13)\
 $c\
 $elixir\
 $elm\
@@ -26,9 +26,9 @@ $bun\
 $nim\
 $rust\
 $scala\
-[](fg:color6 bg:color13)\
+[](fg:color13 bg:color14)\
 $docker_context\
-[](fg:color13 bg:color15)\
+[](fg:color14 bg:color15)\
 $time\
 [](fg:color15)\
 """
@@ -38,13 +38,13 @@ $time\
 
 [username]
 show_always = true
-style_user = "fg:color7 bg:color5"
-style_root = "fg:color7 bg:color5"
+style_user = "fg:color15 bg:color5"
+style_root = "fg:color15 bg:color5"
 format = '[₊˚⊹♡ ᓚ₍ ^. .^₎  ]($style)'
 disabled = false
 
 [os]
-style = "fg:color7 bg:color5"
+style = "fg:color15 bg:color5"
 disabled = true
 
 [directory]
@@ -61,90 +61,90 @@ truncation_symbol = "…/"
 
 [c]
 symbol = " "
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color13"
 format = '[ $symbol ($version) ]($style)'
 
 [cpp]
 symbol = " "
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color13"
 format = '[ $symbol ($version) ]($style)'
 
 [docker_context]
 symbol = " "
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color14"
 format = '[ $symbol $context ]($style)'
 
 [elixir]
 symbol = " "
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color13"
 format = '[ $symbol ($version) ]($style)'
 
 [elm]
 symbol = " "
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color13"
 format = '[ $symbol ($version) ]($style)'
 
 [git_branch]
 symbol = ""
-style = "fg:color7 bg:color12"
+style = "fg:color5 bg:color12"
 format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "fg:color7 bg:color12"
+style = "fg:color5 bg:color12"
 format = '[$all_status$ahead_behind ]($style)'
 
 [golang]
 symbol = " "
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color13"
 format = '[ $symbol ($version) ]($style)'
 
 [gradle]
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color13"
 format = '[ $symbol ($version) ]($style)'
 
 [haskell]
 symbol = " "
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color13"
 format = '[ $symbol ($version) ]($style)'
 
 [java]
 symbol = " "
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color13"
 format = '[ $symbol ($version) ]($style)'
 
 [julia]
 symbol = " "
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color13"
 format = '[ $symbol ($version) ]($style)'
 
 [maven]
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color13"
 format = '[ $symbol ($version) ]($style)'
 
 [nodejs]
 symbol = ""
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color13"
 format = '[ $symbol ($version) ]($style)'
 
 [bun]
 symbol = ""
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color13"
 format = '[ $symbol ($version) ]($style)'
 
 [nim]
 symbol = "󰆥 "
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color13"
 format = '[ $symbol ($version) ]($style)'
 
 [rust]
 symbol = ""
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color13"
 format = '[ $symbol ($version) ]($style)'
 
 [scala]
 symbol = " "
 
-style = "fg:color5 bg:color6"
+style = "fg:color5 bg:color13"
 format = '[ $symbol ($version) ]($style)'
 
 [time]
@@ -160,14 +160,14 @@ color1  = "{{colors.error.default.hex}}"
 color2  = "{{colors.tertiary.default.hex}}"
 color3  = "{{colors.secondary_container.default.hex}}"
 color4  = "{{colors.tertiary_container.default.hex}}"
-color5  = "{{colors.primary.default.hex}}"
-color6  = "{{colors.primary_container.default.hex}}"
-color7  = "{{colors.on_primary_container.default.hex}}"
+color5  = "{{colors.primary.default.hex | to_color | set_lightness: 20 | format: "hex"}}"
+color6  = "{{colors.primary.default.hex | to_color | set_lightness: 66 | format: "hex"}}"
+color7  = "{{colors.primary.default.hex | to_color | set_lightness: 100 | format: "hex"}}"
 color8  = "{{colors.outline.default.hex}}"
 color9  = "{{colors.error_container.default.hex}}"
 color10 = "{{colors.on_tertiary.default.hex}}"
 color11 = "{{colors.on_secondary_container.default.hex}}"
-color12 = "{{colors.on_tertiary_container.default.hex}}"
-color13 = "{{colors.secondary.default.hex}}"
-color14 = "{{colors.on_secondary.default.hex}}"
-color15 = "{{colors.on_primary.default.hex}}"
+color12 = "{{colors.primary.default.hex | to_color | set_lightness: 76 | format: "hex"}}"
+color13 = "{{colors.primary.default.hex | to_color | set_lightness: 86 | format: "hex"}}"
+color14 = "{{colors.primary.default.hex | to_color | set_lightness: 94 | format: "hex"}}"
+color15 = "{{colors.primary.default.hex | to_color | set_lightness: 100 | format: "hex"}}"

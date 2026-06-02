@@ -10,7 +10,7 @@ if status is-interactive
         starship module character
     end
     if test "$TERM" != "linux"
-        set -x STARSHIP_CONFIG ~/.config/starship/starship.toml
+        set -x STARSHIP_CONFIG ~/.cache/matugen/starship.toml
         starship init fish | source
         enable_transience
     end
@@ -64,5 +64,4 @@ if status is-interactive
     #     neofetch-anim
     # end
 end
-
 

@@ -1,6 +1,10 @@
 # OS
 .DS_Store
 
+# Local agent/session artifacts
+audit.md
+SESSION_HANDOVER.md
+
 # DMS generated files — recreated from wallpaper automatically
 **/current-theme.conf
 DankMaterialShell/firefox.css
