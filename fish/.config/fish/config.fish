@@ -37,7 +37,7 @@ if status is-interactive
     alias reloadwp ~/.config/hypr/scripts/reload.sh
     alias emu8086 "wine ~/.wine/drive_c/emu8086/emu8086.exe"
     alias agentswitcher ~/Documents/Projects/AgentSwitcher/agentswitcher
-    alias codex-full-auto "codex --full-auto"
+    alias charles "codex"
 
     if type -q eza
         if test "$TERM" != "linux"

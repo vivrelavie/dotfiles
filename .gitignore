@@ -3,6 +3,8 @@
 
 # Local agent/session artifacts
 local-artifacts/
+plans/
+.obsidian/
 
 # DMS generated files - recreated from wallpaper automatically
 **/current-theme.conf

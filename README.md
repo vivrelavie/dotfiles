@@ -1,10 +1,3 @@
-
-## TODO:
-[ ] Fix starship.toml color palette
-[ ] Fix fastfetch's config.jsonc color palette
-[ ] Fix behavior for overview when changing wallpaper
-[ ] Migrate to chezmoi
-
 # 🍙 My CachyOS Dotfiles
 
 ![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)
@@ -23,32 +16,23 @@ Replace "navier" with your github username.
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply navier
 ```
 
-## MacOS Tahoe Cursor (optional)
-
-```bash
-https://www.gnome-look.org/p/2328404
-```
-
-1. Download from the link above
-2. Extract it and move it to `/usr/share/icons/`
-
 ## 🛠️ Software Stack
 
 The installation script automatically sets up the following environment:
 
-| Category           | Application         | Package Name              | Description                                 |
-| :----------------- | :------------------ | :------------------------ | :------------------------------------------ |
-| **Window Manager** | Niri                | `niri`                    | Infinite scrollable tiling window manager.  |
-| **Shell UI**       | DankMaterialShell   | `dms-shell-bin`           | Custom shell with Quick Settings & Bar.     |
-| **Terminal**       | Alacritty           | `alacritty`               | GPU-accelerated terminal, config via TOML.  |
-| **Browser**        | Zen Browser         | `zen-browser-bin`         | Privacy-focused, vertical-tab Firefox fork. |
-| **Editor**         | VS Code             | `visual-studio-code-bin`  | Official Microsoft binary version.          |
-| **Chat**           | Discord             | `discord`                 | Standard Discord client.                    |
-| **Music**          | Spotify             | `spotify`                 | Music streaming.                            |
-| **Maintenance**    | BleachBit           | `bleachbit`               | System cleaner and space freer.             |
-| **Fonts**          | JetBrains Mono      | `ttf-jetbrains-mono-nerd` | Patched Nerd Font for terminal icons.       |
-| **Theme**          | Adwaita Dark        | `adw-gtk-theme`           | Bridges GTK3 apps to Libadwaita style.      |
-| **Cursor**         | MacOS TahoeX Cursor | `MacOS TahoeX Cursor`     | MacOS Tahoe Cursor.                         |
+| Category           | Application         | Package Name              | Description                                   |
+| :----------------- | :------------------ | :------------------------ | :-------------------------------------------- |
+| **Window Manager** | Niri                | `niri`                    | Infinite scrollable tiling window manager.    |
+| **Shell UI**       | DankMaterialShell   | `dms-shell-bin`           | Custom shell with Quick Settings & Bar.       |
+| **Terminal**       | Kitty               | `kitty`                   | Terminal.                                     |
+| **Browser**        | Zen Browser         | `zen-browser-bin`         | Privacy-focused, vertical-tab Firefox fork.   |
+| **Editor**         | VS Codium           | `vscodium-bin`            | Free Open Source Software Binaries of VSCode. |
+| **Chat**           | Discord             | `discord`                 | Standard Discord client.                      |
+| **Music**          | Spotify             | `spotify`                 | Music streaming.                              |
+| **Maintenance**    | BleachBit           | `bleachbit`               | System cleaner and space freer.               |
+| **Fonts**          | JetBrains Mono      | `ttf-jetbrains-mono-nerd` | Patched Nerd Font for terminal icons.         |
+| **Theme**          | Adwaita Dark        | `adw-gtk-theme`           | Bridges GTK3 apps to Libadwaita style.        |
+| **Cursor**         | MacOS TahoeX Cursor | `MacOS TahoeX Cursor`     | MacOS Tahoe Cursor.                           |
 
 ---
 
@@ -115,3 +99,7 @@ git add .
 git commit -m "Updated configs"
 git push
 ```
+
+## TODO:
+[ ] Fix behavior for overview when changing wallpaper
+[ ] Migrate to chezmoi
