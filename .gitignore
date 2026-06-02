@@ -5,24 +5,28 @@
 audit.md
 SESSION_HANDOVER.md
 
-# DMS generated files — recreated from wallpaper automatically
+# DMS generated files - recreated from wallpaper automatically
 **/current-theme.conf
-DankMaterialShell/firefox.css
-DankMaterialShell/zen.css
-kitty/dank-tabs.conf
-kitty/dank-theme.conf
+DankMaterialShell/.config/DankMaterialShell/.firstlaunch
+DankMaterialShell/.config/DankMaterialShell/.changelog-*
+DankMaterialShell/.config/DankMaterialShell/firefox.css
+DankMaterialShell/.config/DankMaterialShell/zen.css
+kitty/.config/kitty/dank-tabs.conf
+kitty/.config/kitty/dank-theme.conf
 
-# Matugen generated outputs — recreated on wallpaper change
-fastfetch/config.jsonc
-starship/starship.toml
+# Matugen generated outputs - recreated on wallpaper change
+fastfetch/.config/fastfetch/config.jsonc
+starship/.config/starship/starship.toml
 
-# Matugen output cache
-~/.cache/DankMaterialShell/
+# Niri - DMS backups and generated splits
+niri/.config/niri/config.kdl.backup*
+niri/.config/niri/config.kdl.dmsbackup*
+niri/.config/niri/dms/
 
-# Niri — DMS backups and generated splits
-niri/config.kdl.backup*
-niri/config.kdl.dmsbackup*
-niri/dms/
+# Fish generated state
+fish/.config/fish/fish_variables
 
-# DMS plugins repository
+# DMS plugins repository and install symlinks
+DankMaterialShell/.config/DankMaterialShell/plugins/*
+!DankMaterialShell/.config/DankMaterialShell/plugins/*.meta
 DankMaterialShell/.config/DankMaterialShell/plugins/.repos/

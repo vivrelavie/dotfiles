@@ -1,4 +1,4 @@
-fish_add_path /home/stef/.local/bin
+fish_add_path --global ~/.local/bin
 
 # Commands to run in interactive sessions can go here
 if status is-interactive
@@ -20,7 +20,11 @@ if status is-interactive
     #     cat ~/.local/state/quickshell/user/generated/terminal/sequences.txt
     # end
 
-    fastfetch
+    if test -f ~/.cache/matugen/fastfetch.jsonc
+        fastfetch --config ~/.cache/matugen/fastfetch.jsonc
+    else
+        fastfetch
+    end
 
     # Aliases
     # kitty doesn't clear properly so we need to do this weird printing
@@ -33,9 +37,7 @@ if status is-interactive
     alias reloadwp ~/.config/hypr/scripts/reload.sh
     alias emu8086 "wine ~/.wine/drive_c/emu8086/emu8086.exe"
     alias agentswitcher ~/Documents/Projects/AgentSwitcher/agentswitcher
-    alias nigger "codex --full-auto"
-    alias nword "codex --full-auto"
-    alias nigga "codex --full-auto"
+    alias codex-full-auto "codex --full-auto"
 
     if type -q eza
         if test "$TERM" != "linux"
@@ -64,4 +66,3 @@ if status is-interactive
     #     neofetch-anim
     # end
 end
-
