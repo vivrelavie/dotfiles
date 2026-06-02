@@ -4,17 +4,25 @@ plans/
 plans/**
 local-artifacts/
 local-artifacts/**
+.obsidian/
+.obsidian/**
 
-# Old GNU Stow package roots kept ignored during and after migration.
-DankMaterialShell/
-DankMaterialShell/**
-fastfetch/
-fastfetch/**
-fish/
-fish/**
-kitty/
-kitty/**
-matugen/
-matugen/**
-niri/
-niri/**
+# Runtime/generated targets that should not become managed if they appear in source.
+.config/**/current-theme.conf
+.config/DankMaterialShell/.firstlaunch
+.config/DankMaterialShell/.changelog-*
+.config/DankMaterialShell/firefox.css
+.config/DankMaterialShell/zen.css
+.config/DankMaterialShell/plugins/*
+!.config/DankMaterialShell/plugins/*.meta
+.config/DankMaterialShell/plugins/.repos/
+.config/DankMaterialShell/plugins/.repos/**
+.config/fastfetch/config.jsonc
+.config/fish/fish_variables
+.config/kitty/dank-tabs.conf
+.config/kitty/dank-theme.conf
+.config/niri/config.kdl.backup*
+.config/niri/config.kdl.dmsbackup*
+.config/niri/dms/
+.config/niri/dms/**
+.config/starship/starship.toml
