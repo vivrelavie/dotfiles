@@ -3,29 +3,31 @@
 
 # Local agent/session artifacts
 local-artifacts/
+plans/
+.obsidian/
 
-# DMS generated files - recreated from wallpaper automatically
-**/current-theme.conf
-DankMaterialShell/.config/DankMaterialShell/.firstlaunch
-DankMaterialShell/.config/DankMaterialShell/.changelog-*
-DankMaterialShell/.config/DankMaterialShell/firefox.css
-DankMaterialShell/.config/DankMaterialShell/zen.css
-kitty/.config/kitty/dank-tabs.conf
-kitty/.config/kitty/dank-theme.conf
+# DMS generated files - recreated from wallpaper/theme state
+dot_config/**/current-theme.conf
+dot_config/DankMaterialShell/.firstlaunch
+dot_config/DankMaterialShell/.changelog-*
+dot_config/DankMaterialShell/firefox.css
+dot_config/DankMaterialShell/zen.css
+dot_config/kitty/dank-tabs.conf
+dot_config/kitty/dank-theme.conf
 
-# Matugen generated outputs - recreated on wallpaper change
-fastfetch/.config/fastfetch/config.jsonc
-starship/.config/starship/starship.toml
+# Matugen generated outputs - recreated on wallpaper/theme state
+dot_config/fastfetch/config.jsonc
+dot_config/starship/starship.toml
 
 # Niri - DMS backups and generated splits
-niri/.config/niri/config.kdl.backup*
-niri/.config/niri/config.kdl.dmsbackup*
-niri/.config/niri/dms/
+dot_config/niri/config.kdl.backup*
+dot_config/niri/config.kdl.dmsbackup*
+dot_config/niri/dms/
 
 # Fish generated state
-fish/.config/fish/fish_variables
+dot_config/private_fish/fish_variables
 
 # DMS plugins repository and install symlinks
-DankMaterialShell/.config/DankMaterialShell/plugins/*
-!DankMaterialShell/.config/DankMaterialShell/plugins/*.meta
-DankMaterialShell/.config/DankMaterialShell/plugins/.repos/
+dot_config/DankMaterialShell/plugins/*
+!dot_config/DankMaterialShell/plugins/*.meta
+dot_config/DankMaterialShell/plugins/.repos/

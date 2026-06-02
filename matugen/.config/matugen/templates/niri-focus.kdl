@@ -1,4 +1,0 @@
-focus-ring {
-    width 2
-    active-color "{{colors.primary.default.hex}}"
-}
