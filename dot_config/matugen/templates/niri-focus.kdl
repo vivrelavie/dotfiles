@@ -1,4 +1,5 @@
-focus-ring {
-    width 2
-    active-color "{{colors.primary.default.hex}}"
+layout {
+    focus-ring {
+        active-color "{{colors.primary.default.hex}}"
+    }
 }

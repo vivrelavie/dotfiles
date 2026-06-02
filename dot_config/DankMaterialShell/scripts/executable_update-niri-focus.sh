@@ -25,14 +25,10 @@ if [[ ! "$color" =~ ^#[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$ ]]; then
     exit 1
 fi
 
-if ! grep -Eq '^[[:space:]]*active-color "#[0-9A-Fa-f]{3,8}"' "$target_file"; then
-    printf 'missing active-color line in niri config: %s\n' "$target_file" >&2
+if ! grep -Eq '^[[:space:]]*include "~/.cache/DankMaterialShell/niri-focus\.kdl"' "$target_file"; then
+    printf 'missing niri focus include in config: %s\n' "$target_file" >&2
     exit 1
 fi
 
-tmp_file="$(mktemp)"
-trap 'rm -f "$tmp_file"' EXIT
-
-sed 's/^\([[:space:]]*active-color "\)#[0-9A-Fa-f]\{3,8\}\(".*\)$/\1'"$color"'\2/' "$target_file" > "$tmp_file"
-install -m 0644 "$tmp_file" "$target_file"
+niri validate -c "$target_file" >/dev/null
 niri msg action load-config-file
