@@ -8,15 +8,16 @@ My personal Arch/CachyOS configuration reinstall repo for Niri + DankMaterialShe
 
 ## Fresh Install
 
-Use these steps after installing Arch or CachyOS and booting into the new user account. Networking must work, and the user must be able to run `sudo`.
+Use these steps after installing Arch or CachyOS and booting into the new user
+account. Networking must work, and the user must be able to run `sudo`.
 
 ```sh
-sudo pacman -Syu
-sudo pacman -S --needed git chezmoi
-git clone https://github.com/vivrelavie/dotfiles.git ~/dotfiles
-chezmoi init --source ~/dotfiles --apply
-~/install-cachyos.sh
+sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply vivrelavie
+~/install.sh
 ```
+
+This uses chezmoi's GitHub shorthand and applies `vivrelavie/dotfiles`. It
+expects the repo to be public, or GitHub authentication to already be available.
 
 After the installer finishes, reboot or log out and back in:
 
@@ -32,7 +33,7 @@ sudo tailscale up
 
 ## Install Script
 
-The install script is tracked as `executable_install-cachyos.sh`. Chezmoi applies it as `~/install-cachyos.sh` with executable permissions.
+The install script is tracked as `executable_install.sh`. Chezmoi applies it as `~/install.sh` with executable permissions.
 
 It will:
 
@@ -102,15 +103,15 @@ manually with yay:
 
 ```sh
 yay -S package_name
-~/install-cachyos.sh
+~/install.sh
 ```
 
 ### Chezmoi did not use this checkout as the source
 
-Set this repo as the local chezmoi source:
+Open the active chezmoi source directory:
 
 ```sh
-chezmoi init --source ~/dotfiles
+chezmoi cd
 ```
 
 ## Fresh Install Checks
@@ -121,7 +122,7 @@ Validate configs and services:
 niri validate -c ~/.config/niri/config.kdl
 systemctl status sshd.service
 systemctl status tailscaled.service
-chezmoi --source ~/dotfiles status
+chezmoi status
 ```
 
 ## Daily Workflow
@@ -131,32 +132,32 @@ Edit a managed file:
 Format:
 
 ```sh
-chezmoi --source ~/dotfiles edit --apply <target-file>
+chezmoi edit --apply <target-file>
 ```
 
 Example:
 
 ```sh
-chezmoi --source ~/dotfiles edit --apply ~/.config/niri/config.kdl
+chezmoi edit --apply ~/.config/niri/config.kdl
 ```
 
 Inspect and apply changes from this checkout:
 
 ```sh
-chezmoi --source ~/dotfiles diff
-chezmoi --source ~/dotfiles apply
+chezmoi diff
+chezmoi apply
 ```
 
 Track a GUI/config change:
 
 ```sh
-chezmoi --source ~/dotfiles add ~/.config/DankMaterialShell
+chezmoi add ~/.config/DankMaterialShell
 ```
 
 Commit source changes:
 
 ```sh
-cd ~/dotfiles
+chezmoi cd
 git status
 git add .
 git commit -m "Update dotfiles"

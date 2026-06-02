@@ -13,7 +13,7 @@ Managed targets:
 ~/.config/kitty/
 ~/.config/matugen/
 ~/.config/niri/
-~/install-cachyos.sh
+~/install.sh
 ```
 
 Source paths:
@@ -25,7 +25,7 @@ dot_config/kitty/
 dot_config/matugen/
 dot_config/niri/
 dot_config/private_fish/
-executable_install-cachyos.sh
+executable_install.sh
 ```
 
 `dot_config/private_fish/` maps to `~/.config/fish/` and keeps that target
