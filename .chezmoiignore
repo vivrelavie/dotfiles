@@ -1,5 +1,6 @@
 # Repository support files.
 README.md
+CHEZMOI.md
 plans/
 plans/**
 local-artifacts/

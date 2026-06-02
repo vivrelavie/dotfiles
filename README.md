@@ -1,84 +1,140 @@
-# My CachyOS Dotfiles
+# Arch/CachyOS Dotfiles
 
-Personal Arch/CachyOS configuration for Niri, DankMaterialShell, Kitty, Fish,
-Matugen, and Fastfetch. This repository is a chezmoi source tree.
+![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)
+![Niri](https://img.shields.io/badge/Niri-WM-ff69b4?style=for-the-badge)
+![Managed by Chezmoi](https://img.shields.io/badge/chezmoi-000000?style=for-the-badge&logo=chezmoi&logoColor=white)
 
-Chezmoi source paths live in this repository under `dot_config/...`. When
-applied, they become real files under `~/.config/...`.
+My personal Arch/CachyOS configuration reinstall repo for Niri + DankMaterialShell. This repository is managed with [chezmoi](https://www.chezmoi.io/).
 
 ## Fresh Install
 
-Install chezmoi and apply this repository:
+Use these steps after installing Arch or CachyOS and booting into the new user account. Networking must work, and the user must be able to run `sudo`.
 
 ```sh
-sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply vivrelavie/dotfiles
+sudo pacman -Syu
+sudo pacman -S --needed git chezmoi
+git clone https://github.com/vivrelavie/dotfiles.git ~/dotfiles
+chezmoi init --source ~/dotfiles --apply
+~/install-cachyos.sh
 ```
 
-This repository does not currently include a package bootstrap script. Install
-the required packages separately before expecting the full desktop session to
-work.
-
-## Local Apply
-
-When working from this checkout:
+After the installer finishes, reboot or log out and back in:
 
 ```sh
-chezmoi --source ~/dotfiles diff
-chezmoi --source ~/dotfiles apply
+sudo reboot
 ```
 
-To make this checkout the default source directory on this machine:
+If Tailscale was installed, authenticate it after reboot:
+
+```sh
+sudo tailscale up
+```
+
+## Install Script
+
+The install script is tracked as `executable_install-cachyos.sh`. Chezmoi applies it as `~/install-cachyos.sh` with executable permissions.
+
+It will:
+
+```text
+- install yay if it is missing
+- install desktop packages, fonts, apps, Fish, Fastfetch, Yazi, Neovim, GitHub CLI, OpenSSH, and Tailscale
+- install LazyVim starter config if ~/.config/nvim does not exist
+- apply the Adw-GTK3 dark theme when gsettings is available
+- remove Firefox if it is installed
+- enable and start sshd.service and tailscaled.service when available
+- install DankMaterialShell using its official installer if dms is missing
+```
+
+## Software Stack
+
+| Category       | Application              | Package                   | Description                                  |
+| :------------- | :----------------------- | :------------------------ | :------------------------------------------- |
+| Window Manager | Niri                     | `niri`                    | Scrollable tiling Wayland compositor.        |
+| Shell UI       | DankMaterialShell        | official installer        | Panel, launcher, widgets, and desktop shell. |
+| Shell          | Fish                     | `fish`                    | Friendly interactive shell.                  |
+| Terminal       | Kitty                    | `kitty`                   | GPU-accelerated terminal emulator.           |
+| Terminal UI    | Yazi                     | `yazi`                    | Terminal file manager.                       |
+| System Info    | Fastfetch                | `fastfetch`               | System information summary for the terminal. |
+| Browser        | Zen Browser              | `zen-browser-bin`         | Firefox-based browser.                       |
+| Editor         | VSCodium                 | `vscodium-bin`            | Open-source VS Code build.                   |
+| Editor         | Neovim                   | `neovim`                  | Terminal editor with LazyVim starter config. |
+| CLI            | GitHub CLI               | `github-cli`              | GitHub commands from the terminal.           |
+| Chat           | Vesktop                  | `vesktop-bin`             | Desktop client for Discord.                  |
+| Music          | Spotify                  | `spotify`                 | Music streaming desktop client.              |
+| Recording      | OBS Studio               | `obs-studio`              | Screen recording and streaming tool.         |
+| File Sharing   | LocalSend                | `localsend-bin`           | Local network file transfer.                 |
+| Services       | OpenSSH                  | `openssh`                 | SSH client and server package.               |
+| Services       | Tailscale                | `tailscale`               | Mesh VPN for private device access.          |
+| Maintenance    | BleachBit                | `bleachbit`               | Cleanup tool for cache and temporary files.  |
+| Fonts          | JetBrains Mono           | `ttf-jetbrains-mono`      | Base terminal and editor font.               |
+| Fonts          | JetBrains Mono Nerd Font | `ttf-jetbrains-mono-nerd` | Patched font for terminal icons.             |
+| Theme          | Adw GTK Theme            | `adw-gtk-theme`           | GTK3 theme matching Libadwaita style.        |
+
+## Theming And Appearance
+
+The bootstrap script applies `adw-gtk3-dark` and sets the GNOME color scheme to
+`prefer-dark` when `gsettings` is available.
+
+The Kitty config uses `JetBrains Mono Nerd Font`. If terminal icons render as
+empty boxes, confirm the terminal font is set to `JetBrainsMono Nerd Font` or
+`JetBrains Mono Nerd Font`.
+
+If colors or generated theme files look stale, change the wallpaper from
+DankMaterialShell and let it regenerate the theme outputs.
+
+More chezmoi mapping details live in [CHEZMOI.md](CHEZMOI.md).
+
+## Manual Steps After Install
+
+1. Log in to Zen Browser, Vesktop, Spotify, VSCodium Sync, GitHub CLI, and Tailscale.
+2. Run `sudo tailscale up` if Tailscale has not been authenticated yet.
+3. Change the wallpaper in DankMaterialShell if generated colors or theme files look stale.
+4. Open DankMaterialShell settings if the shell uses default layout or theme values after first launch.
+5. Install hardware-specific drivers, optional cursor themes, and any machine-specific secrets separately.
+
+## Troubleshooting
+
+### The installer failed on a package
+
+Re-run the script after fixing the failing package or install the package
+manually with yay:
+
+```sh
+yay -S package_name
+~/install-cachyos.sh
+```
+
+### Chezmoi did not use this checkout as the source
+
+Set this repo as the local chezmoi source:
 
 ```sh
 chezmoi init --source ~/dotfiles
 ```
 
-## Source Layout
+## Fresh Install Checks
 
-Tracked chezmoi targets:
+Validate configs and services:
 
-```text
-dot_config/DankMaterialShell/
-dot_config/fastfetch/
-dot_config/kitty/
-dot_config/matugen/
-dot_config/niri/
-dot_config/private_fish/
-```
-
-`dot_config/private_fish/` maps to `~/.config/fish/` and keeps that directory
-private.
-
-## Generated State
-
-The repository tracks source templates and durable DMS plugin metadata only.
-Generated/runtime files stay out of Git.
-
-Tracked:
-
-```text
-dot_config/matugen/templates/*.jsonc
-dot_config/matugen/templates/*.kdl
-dot_config/matugen/templates/*.toml
-dot_config/DankMaterialShell/plugins/*.meta
-```
-
-Generated locally:
-
-```text
-~/.cache/matugen/fastfetch.jsonc
-~/.cache/matugen/starship.toml
-~/.cache/DankMaterialShell/niri-focus.kdl
-~/.config/DankMaterialShell/firefox.css
-~/.config/DankMaterialShell/zen.css
-~/.config/kitty/dank-tabs.conf
-~/.config/kitty/dank-theme.conf
-~/.config/niri/dms/*.kdl
+```sh
+niri validate -c ~/.config/niri/config.kdl
+systemctl status sshd.service
+systemctl status tailscaled.service
+chezmoi --source ~/dotfiles status
 ```
 
 ## Daily Workflow
 
 Edit a managed file:
+
+Format:
+
+```sh
+chezmoi --source ~/dotfiles edit --apply <target-file>
+```
+
+Example:
 
 ```sh
 chezmoi --source ~/dotfiles edit --apply ~/.config/niri/config.kdl
@@ -91,29 +147,20 @@ chezmoi --source ~/dotfiles diff
 chezmoi --source ~/dotfiles apply
 ```
 
+Track a GUI/config change:
+
+```sh
+chezmoi --source ~/dotfiles add ~/.config/DankMaterialShell
+```
+
 Commit source changes:
 
 ```sh
+cd ~/dotfiles
 git status
 git add .
 git commit -m "Update dotfiles"
 git push
-```
-
-## Validation
-
-Regenerate theme outputs:
-
-```sh
-matugen color hex '#b99ab6' -c ~/.config/matugen/config.toml
-```
-
-Validate generated configs:
-
-```sh
-fastfetch --config ~/.cache/matugen/fastfetch.jsonc --pipe true --logo none
-env STARSHIP_CONFIG=~/.cache/matugen/starship.toml starship explain
-niri validate -c ~/.config/niri/config.kdl
 ```
 
 ## TODO
