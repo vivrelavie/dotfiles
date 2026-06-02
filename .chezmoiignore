@@ -1,0 +1,20 @@
+# Repository support files.
+README.md
+plans/
+plans/**
+local-artifacts/
+local-artifacts/**
+
+# Old GNU Stow package roots kept ignored during and after migration.
+DankMaterialShell/
+DankMaterialShell/**
+fastfetch/
+fastfetch/**
+fish/
+fish/**
+kitty/
+kitty/**
+matugen/
+matugen/**
+niri/
+niri/**

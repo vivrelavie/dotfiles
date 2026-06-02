@@ -1,105 +1,121 @@
-# 🍙 My CachyOS Dotfiles
+# My CachyOS Dotfiles
 
-![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)
-![Niri](https://img.shields.io/badge/Niri-WM-ff69b4?style=for-the-badge)
-![Managed by Chezmoi](https://img.shields.io/badge/chezmoi-000000?style=for-the-badge&logo=chezmoi&logoColor=white)
+Personal Arch/CachyOS configuration for Niri, DankMaterialShell, Kitty, Fish,
+Matugen, and Fastfetch. This repository is a chezmoi source tree.
 
-My personal configuration for **Arch**, featuring the **Niri** window manager and **DankMaterialShell**. Managed with [chezmoi](https://www.chezmoi.io/).
+Chezmoi source paths live in this repository under `dot_config/...`. When
+applied, they become real files under `~/.config/...`.
 
-## 🚀 One-Line Install (Fresh Machine)
+## Fresh Install
 
-To install this setup on a fresh Arch machine, open a terminal and run:
+Install chezmoi and apply this repository:
 
-Replace "navier" with your github username.
-
-```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply navier
+```sh
+sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply vivrelavie/dotfiles
 ```
 
-## 🛠️ Software Stack
+This repository does not currently include a package bootstrap script. Install
+the required packages separately before expecting the full desktop session to
+work.
 
-The installation script automatically sets up the following environment:
+## Local Apply
 
-| Category           | Application         | Package Name              | Description                                   |
-| :----------------- | :------------------ | :------------------------ | :-------------------------------------------- |
-| **Window Manager** | Niri                | `niri`                    | Infinite scrollable tiling window manager.    |
-| **Shell UI**       | DankMaterialShell   | `dms-shell-bin`           | Custom shell with Quick Settings & Bar.       |
-| **Terminal**       | Kitty               | `kitty`                   | Terminal.                                     |
-| **Browser**        | Zen Browser         | `zen-browser-bin`         | Privacy-focused, vertical-tab Firefox fork.   |
-| **Editor**         | VS Codium           | `vscodium-bin`            | Free Open Source Software Binaries of VSCode. |
-| **Chat**           | Discord             | `discord`                 | Standard Discord client.                      |
-| **Music**          | Spotify             | `spotify`                 | Music streaming.                              |
-| **Maintenance**    | BleachBit           | `bleachbit`               | System cleaner and space freer.               |
-| **Fonts**          | JetBrains Mono      | `ttf-jetbrains-mono-nerd` | Patched Nerd Font for terminal icons.         |
-| **Theme**          | Adwaita Dark        | `adw-gtk-theme`           | Bridges GTK3 apps to Libadwaita style.        |
-| **Cursor**         | MacOS TahoeX Cursor | `MacOS TahoeX Cursor`     | MacOS Tahoe Cursor.                           |
+When working from this checkout:
 
----
-
-## 🎨 Theming & Appearance
-
-This setup enforces a consistent **Dark Mode** across the system.
-
--   **GTK Applications:** The installer automatically applies `adw-gtk3-dark` and sets the color scheme to `prefer-dark`. This ensures legacy apps (like BleachBit or Pavucontrol) match modern Libadwaita apps (like Zen or Nautilus).
--   **Terminal Icons:** `ttf-jetbrains-mono-nerd` is installed by default. If you see "squares" instead of icons in your terminal, ensure your terminal font is set to **JetBrainsMono Nerd Font**.
-
----
-
-## ⚠️ Manual Steps (After Install)
-
-While Chezmoi handles 95% of the setup, you will need to do these things manually after the first boot:
-
-1.  **Logins:** Log into Zen Browser (Sync), Discord, Spotify, and VS Code Sync.
-2.  **DankMaterialShell:** If the shell looks "default," you may need to reload it or select your preferred layout in the DMS settings menu once.
-
----
-
-## ❓ Troubleshooting
-
-**"The installer failed on a package!"**
-If the script stops mid-way, you can resume it or install the missing package manually:
-
-```bash
-paru -S package_name
-chezmoi apply
+```sh
+chezmoi --source ~/dotfiles diff
+chezmoi --source ~/dotfiles apply
 ```
 
----
+To make this checkout the default source directory on this machine:
 
-## 📖 Daily Workflow (Cheat Sheet)
-
-### 1️⃣ Edit a Config (The Right Way)
-
-chezmoi edit --apply ~/.config/niri/config.kdl
-
-```bash
-chezmoi edit --apply ~/.config/niri/config.kdl
+```sh
+chezmoi init --source ~/dotfiles
 ```
 
-### 2️⃣ Save Visual/GUI Changes
+## Source Layout
 
-```bash
-# Example: After changing DMS theme
-chezmoi add ~/.config/DankMaterialShell
+Tracked chezmoi targets:
+
+```text
+dot_config/DankMaterialShell/
+dot_config/fastfetch/
+dot_config/kitty/
+dot_config/matugen/
+dot_config/niri/
+dot_config/private_fish/
 ```
 
-### 3️⃣ Add New Software
+`dot_config/private_fish/` maps to `~/.config/fish/` and keeps that directory
+private.
 
-To add a new app to the auto-installer script:
+## Generated State
 
-1. `chezmoi cd`
-2. Edit `run_once_before_install_packages.sh`
-3. Add the package name to the list.
+The repository tracks source templates and durable DMS plugin metadata only.
+Generated/runtime files stay out of Git.
 
-### 4️⃣ Push Changes to GitHub
+Tracked:
 
-```bash
-chezmoi cd
+```text
+dot_config/matugen/templates/*.jsonc
+dot_config/matugen/templates/*.kdl
+dot_config/matugen/templates/*.toml
+dot_config/DankMaterialShell/plugins/*.meta
+```
+
+Generated locally:
+
+```text
+~/.cache/matugen/fastfetch.jsonc
+~/.cache/matugen/starship.toml
+~/.cache/DankMaterialShell/niri-focus.kdl
+~/.config/DankMaterialShell/firefox.css
+~/.config/DankMaterialShell/zen.css
+~/.config/kitty/dank-tabs.conf
+~/.config/kitty/dank-theme.conf
+~/.config/niri/dms/*.kdl
+```
+
+## Daily Workflow
+
+Edit a managed file:
+
+```sh
+chezmoi --source ~/dotfiles edit --apply ~/.config/niri/config.kdl
+```
+
+Inspect and apply changes from this checkout:
+
+```sh
+chezmoi --source ~/dotfiles diff
+chezmoi --source ~/dotfiles apply
+```
+
+Commit source changes:
+
+```sh
+git status
 git add .
-git commit -m "Updated configs"
+git commit -m "Update dotfiles"
 git push
 ```
 
-## TODO:
-[ ] Fix behavior for overview when changing wallpaper
-[ ] Migrate to chezmoi
+## Validation
+
+Regenerate theme outputs:
+
+```sh
+matugen color hex '#b99ab6' -c ~/.config/matugen/config.toml
+```
+
+Validate generated configs:
+
+```sh
+fastfetch --config ~/.cache/matugen/fastfetch.jsonc --pipe true --logo none
+env STARSHIP_CONFIG=~/.cache/matugen/starship.toml starship explain
+niri validate -c ~/.config/niri/config.kdl
+```
+
+## TODO
+
+- Fix behavior for overview when changing wallpaper.
