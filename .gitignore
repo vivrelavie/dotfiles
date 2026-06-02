@@ -2,8 +2,7 @@
 .DS_Store
 
 # Local agent/session artifacts
-audit.md
-SESSION_HANDOVER.md
+local-artifacts/
 
 # DMS generated files - recreated from wallpaper automatically
 **/current-theme.conf
