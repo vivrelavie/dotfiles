@@ -400,6 +400,10 @@ window-rule {
     clip-to-geometry true
 }
 
+// DMS manages this generated file. Load it before repo-owned binds so the
+// explicit binds below win conflicts.
+include "dms/binds.kdl"
+
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
@@ -755,4 +759,3 @@ include "~/.cache/DankMaterialShell/niri-focus.kdl"
 include "dms/cursor.kdl"
 include "dms/windowrules.kdl"
 include "dms/wpblur.kdl"
-include "dms/binds.kdl"

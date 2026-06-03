@@ -239,6 +239,34 @@ install_dank_material_shell() {
     sh "$installer"
 }
 
+ensure_niri_dms_include_files() {
+    local config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+    local cache_home="${XDG_CACHE_HOME:-$HOME/.cache}"
+    local niri_dms_dir="$config_home/niri/dms"
+    local niri_focus_file="$cache_home/DankMaterialShell/niri-focus.kdl"
+    local file
+    local target
+
+    mkdir -p "$niri_dms_dir" "$(dirname "$niri_focus_file")"
+
+    for file in binds.kdl cursor.kdl windowrules.kdl wpblur.kdl; do
+        target="$niri_dms_dir/$file"
+        if [[ ! -e "$target" ]]; then
+            : > "$target"
+        fi
+    done
+
+    if [[ ! -e "$niri_focus_file" ]]; then
+        cat > "$niri_focus_file" <<'KDL'
+layout {
+    focus-ring {
+        active-color "#edb4eb"
+    }
+}
+KDL
+    fi
+}
+
 main() {
     trap cleanup EXIT
     trap 'handle_error "$LINENO" "$BASH_COMMAND"' ERR
@@ -253,6 +281,7 @@ main() {
     run_step "Enabling system services" enable_services
     run_step "Checking LazyVim starter config" install_lazyvim
     run_step "Checking DankMaterialShell installation" install_dank_material_shell
+    run_step "Ensuring Niri/DMS include files" ensure_niri_dms_include_files
     status_done "Software installation complete."
 }
 
