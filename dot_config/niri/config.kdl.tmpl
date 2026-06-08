@@ -1,3 +1,4 @@
+{{- $desktop_shell := get . "desktop_shell" | default "dms" -}}
 // This config is in the KDL format: https://kdl.dev
 // "/-" comments out the following node.
 // Check the wiki for a full description of the configuration:
@@ -288,6 +289,11 @@ layout {
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
+{{- if eq $desktop_shell "noctalia-v4" }}
+spawn-at-startup "qs" "-c" "noctalia-shell"
+{{- else if eq $desktop_shell "noctalia-v5" }}
+spawn-at-startup "noctalia"
+{{- end }}
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
@@ -320,10 +326,21 @@ animations {
     // slowdown 3.0
 }
 
+{{- if eq $desktop_shell "dms" }}
 layer-rule {
     match namespace="dms:blurwallpaper"
     place-within-backdrop true
 }
+{{- else if or (eq $desktop_shell "noctalia-v4") (eq $desktop_shell "noctalia-v5") }}
+debug {
+    honor-xdg-activation-with-invalid-serial
+}
+
+layer-rule {
+    match namespace="^noctalia-overview*"
+    place-within-backdrop true
+}
+{{- end }}
 
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
@@ -366,11 +383,19 @@ window-rule {
     clip-to-geometry true
 }
 
+{{- if eq $desktop_shell "dms" }}
 // Open DMS windows as floating by default
 window-rule {
     match app-id=r#"org.quickshell$"#
     open-floating true
 }
+{{- else if eq $desktop_shell "noctalia-v5" }}
+// Open Noctalia settings as floating by default.
+window-rule {
+    match app-id="dev.noctalia.Noctalia.Settings"
+    open-floating true
+}
+{{- end }}
 
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
@@ -400,9 +425,11 @@ window-rule {
     clip-to-geometry true
 }
 
+{{- if eq $desktop_shell "dms" }}
 // DMS manages this generated file. Load it before repo-owned binds so the
 // explicit binds below win conflicts.
 include "dms/binds.kdl"
+{{- end }}
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -417,6 +444,7 @@ binds {
 
     // Mod-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.
+{{- if eq $desktop_shell "dms" }}
     Mod+Shift+Slash { spawn "dms" "ipc" "call" "keybinds" "toggle" "niri"; }
 
     // DMS: Application Launchers
@@ -455,6 +483,69 @@ binds {
     Mod+Alt+L hotkey-overlay-title="Lock Screen" {
         spawn "dms" "ipc" "call" "lock" "lock";
     }
+{{- else if eq $desktop_shell "noctalia-v4" }}
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    // Noctalia v4: Application Launchers
+    Mod+Space hotkey-overlay-title="Application Launcher" {
+        spawn-sh "qs -c noctalia-shell ipc call launcher toggle";
+    }
+    Mod+V hotkey-overlay-title="Clipboard Manager" {
+        spawn-sh "qs -c noctalia-shell ipc call launcher clipboard";
+    }
+    Mod+T hotkey-overlay-title="System Monitor" {
+        spawn-sh "qs -c noctalia-shell ipc call systemMonitor toggle";
+    }
+    Mod+Shift+S hotkey-overlay-title="Settings" {
+        spawn-sh "qs -c noctalia-shell ipc call settings toggle";
+    }
+    Mod+N hotkey-overlay-title="Notification Center" {
+        spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory";
+    }
+    Mod+Y hotkey-overlay-title="Browse Wallpapers" {
+        spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle";
+    }
+    Mod+Shift+P hotkey-overlay-title="Power Menu" {
+        spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle";
+    }
+    Mod+Shift+C hotkey-overlay-title="Control Center" {
+        spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle";
+    }
+
+    // Noctalia v4: Security
+    Mod+Alt+L hotkey-overlay-title="Lock Screen" {
+        spawn-sh "qs -c noctalia-shell ipc call lockScreen lock";
+    }
+{{- else if eq $desktop_shell "noctalia-v5" }}
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    // Noctalia v5: Application Launchers
+    Mod+Space hotkey-overlay-title="Application Launcher" {
+        spawn-sh "noctalia msg panel-toggle launcher";
+    }
+    Mod+V hotkey-overlay-title="Clipboard Manager" {
+        spawn-sh "noctalia msg panel-toggle clipboard";
+    }
+    Mod+Shift+S hotkey-overlay-title="Settings" {
+        spawn-sh "noctalia msg settings-toggle";
+    }
+    Mod+Y hotkey-overlay-title="Browse Wallpapers" {
+        spawn-sh "noctalia msg panel-toggle wallpaper";
+    }
+    Mod+Shift+P hotkey-overlay-title="Power Menu" {
+        spawn-sh "noctalia msg panel-toggle session";
+    }
+    Mod+Shift+C hotkey-overlay-title="Control Center" {
+        spawn-sh "noctalia msg panel-toggle control-center";
+    }
+
+    // Noctalia v5: Security
+    Mod+Alt+L hotkey-overlay-title="Lock Screen" {
+        spawn-sh "noctalia msg session lock";
+    }
+{{- else }}
+    Mod+Shift+Slash { show-hotkey-overlay; }
+{{- end }}
 
 
     // Custom app binds.
@@ -496,6 +587,7 @@ binds {
     // XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+5%"; }
     // XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
 
+{{- if eq $desktop_shell "dms" }}
     // DMS: Audio Controls
     XF86AudioRaiseVolume allow-when-locked=true cooldown-ms=150 {
         spawn "dms" "ipc" "call" "audio" "increment" "5";
@@ -514,6 +606,63 @@ binds {
     XF86MonBrightnessDown allow-when-locked=true {
        spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
     }
+{{- else if eq $desktop_shell "noctalia-v4" }}
+    // Noctalia v4: Audio Controls
+    XF86AudioRaiseVolume allow-when-locked=true cooldown-ms=150 {
+        spawn-sh "qs -c noctalia-shell ipc call volume increase";
+    }
+    XF86AudioLowerVolume allow-when-locked=true cooldown-ms=150 {
+        spawn-sh "qs -c noctalia-shell ipc call volume decrease";
+    }
+    XF86AudioMute allow-when-locked=true cooldown-ms=150 {
+        spawn-sh "qs -c noctalia-shell ipc call volume muteOutput";
+    }
+
+    // Noctalia v4: Brightness Controls
+    XF86MonBrightnessUp allow-when-locked=true {
+       spawn-sh "qs -c noctalia-shell ipc call brightness increase";
+    }
+    XF86MonBrightnessDown allow-when-locked=true {
+       spawn-sh "qs -c noctalia-shell ipc call brightness decrease";
+    }
+{{- else if eq $desktop_shell "noctalia-v5" }}
+    // Noctalia v5: Audio Controls
+    XF86AudioRaiseVolume allow-when-locked=true cooldown-ms=150 {
+        spawn-sh "noctalia msg volume-up";
+    }
+    XF86AudioLowerVolume allow-when-locked=true cooldown-ms=150 {
+        spawn-sh "noctalia msg volume-down";
+    }
+    XF86AudioMute allow-when-locked=true cooldown-ms=150 {
+        spawn-sh "noctalia msg volume-mute";
+    }
+
+    // Noctalia v5: Brightness Controls
+    XF86MonBrightnessUp allow-when-locked=true {
+       spawn-sh "noctalia msg brightness-up";
+    }
+    XF86MonBrightnessDown allow-when-locked=true {
+       spawn-sh "noctalia msg brightness-down";
+    }
+{{- else }}
+    // Generic audio and brightness controls.
+    XF86AudioRaiseVolume allow-when-locked=true cooldown-ms=150 {
+        spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0";
+    }
+    XF86AudioLowerVolume allow-when-locked=true cooldown-ms=150 {
+        spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+    }
+    XF86AudioMute allow-when-locked=true cooldown-ms=150 {
+        spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+    }
+
+    XF86MonBrightnessUp allow-when-locked=true {
+       spawn "brightnessctl" "--class=backlight" "set" "+5%";
+    }
+    XF86MonBrightnessDown allow-when-locked=true {
+       spawn "brightnessctl" "--class=backlight" "set" "5%-";
+    }
+{{- end }}
 
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
@@ -754,8 +903,10 @@ binds {
     // Mod+Shift+P { power-off-monitors; }
 }
 
+{{- if eq $desktop_shell "dms" }}
 // Generated by DMS into ~/.config/niri/dms. Regenerate before first launch on a fresh setup.
 include "~/.cache/DankMaterialShell/niri-focus.kdl"
 include "dms/cursor.kdl"
 include "dms/windowrules.kdl"
 include "dms/wpblur.kdl"
+{{- end }}

@@ -1,3 +1,11 @@
+{{- $desktop_shell := get . "desktop_shell" | default "dms" -}}
+{{- if ne $desktop_shell "dms" }}
+.config/DankMaterialShell/
+.config/DankMaterialShell/**
+.config/matugen/
+.config/matugen/**
+{{- end }}
+
 # Repository support files.
 README.md
 CHEZMOI.md

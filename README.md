@@ -4,7 +4,7 @@
 ![Niri](https://img.shields.io/badge/Niri-WM-ff69b4?style=for-the-badge)
 ![Managed by Chezmoi](https://img.shields.io/badge/chezmoi-000000?style=for-the-badge&logo=chezmoi&logoColor=white)
 
-My personal Arch/CachyOS configuration reinstall repo for Niri + DankMaterialShell. This repository is managed with [chezmoi](https://www.chezmoi.io/).
+My personal Arch/CachyOS configuration reinstall repo for Niri with a selectable desktop shell profile. This repository is managed with [chezmoi](https://www.chezmoi.io/).
 
 ## Fresh Install
 
@@ -12,12 +12,23 @@ Use these steps after installing Arch or CachyOS and booting into the new user
 account. Networking must work, and the user must be able to run `sudo`.
 
 ```sh
-sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply vivrelavie
-~/install.sh
+sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init vivrelavie
+bash ~/.local/share/chezmoi/executable_install.sh
 ```
 
-This uses chezmoi's GitHub shorthand and applies `vivrelavie/dotfiles`. It
-expects the repo to be public, or GitHub authentication to already be available.
+This uses chezmoi's GitHub shorthand and initializes `vivrelavie/dotfiles`.
+During `chezmoi init`, choose the desktop shell profile for the machine:
+`dms`, `noctalia-v4`, `noctalia-v5`, or `none`.
+
+The installer shows a review menu before installing packages. It can also show
+the pending chezmoi diff and run `chezmoi apply --interactive`, so file writes
+and overwrites are confirmed before package installation starts.
+
+For an already-applied checkout, run:
+
+```sh
+~/install.sh
+```
 
 After the installer finishes, reboot or log out and back in:
 
@@ -38,13 +49,23 @@ The install script is tracked as `executable_install.sh`. Chezmoi applies it as 
 It will:
 
 ```text
+- ask which package/action groups should run before installation
+- optionally show chezmoi file changes and run chezmoi apply --interactive
 - install yay if it is missing
 - install desktop packages, fonts, apps, Fish, Fastfetch, Yazi, Neovim, GitHub CLI, OpenSSH, and Tailscale
 - install LazyVim starter config if ~/.config/nvim does not exist
 - apply the Adw-GTK3 dark theme when gsettings is available
 - remove Firefox if it is installed
 - enable and start sshd.service and tailscaled.service when available
-- install DankMaterialShell using its official installer if dms is missing
+- install the selected desktop shell: DankMaterialShell, Noctalia v4, Noctalia v5, or none
+- remove stock Niri helper apps replaced by DMS or this repo when the DMS profile is selected
+```
+
+Non-interactive examples:
+
+```sh
+~/install.sh --desktop-shell dms --yes
+~/install.sh --desktop-shell noctalia-v5 --yes
 ```
 
 ## Software Stack
@@ -52,7 +73,9 @@ It will:
 | Category       | Application              | Package                   | Description                                  |
 | :------------- | :----------------------- | :------------------------ | :------------------------------------------- |
 | Window Manager | Niri                     | `niri`                    | Scrollable tiling Wayland compositor.        |
-| Shell UI       | DankMaterialShell        | official installer        | Panel, launcher, widgets, and desktop shell. |
+| Shell UI       | DankMaterialShell        | official installer        | Default shell profile.                       |
+| Shell UI       | Noctalia v4              | `noctalia-shell`          | Stable Quickshell-based alternative profile. |
+| Shell UI       | Noctalia v5              | `noctalia-git`            | Alpha native Noctalia alternative profile.   |
 | Shell          | Fish                     | `fish`                    | Friendly interactive shell.                  |
 | Terminal       | Kitty                    | `kitty`                   | GPU-accelerated terminal emulator.           |
 | Terminal UI    | Yazi                     | `yazi`                    | Terminal file manager.                       |
@@ -81,8 +104,8 @@ The Kitty config uses `JetBrains Mono Nerd Font`. If terminal icons render as
 empty boxes, confirm the terminal font is set to `JetBrainsMono Nerd Font` or
 `JetBrains Mono Nerd Font`.
 
-If colors or generated theme files look stale, change the wallpaper from
-DankMaterialShell and let it regenerate the theme outputs.
+For the DMS profile, if colors or generated theme files look stale, change the
+wallpaper from DankMaterialShell and let it regenerate the theme outputs.
 
 More chezmoi mapping details live in [CHEZMOI.md](CHEZMOI.md).
 
@@ -90,8 +113,8 @@ More chezmoi mapping details live in [CHEZMOI.md](CHEZMOI.md).
 
 1. Log in to Zen Browser, Vesktop, Spotify, VSCodium Sync, GitHub CLI, and Tailscale.
 2. Run `sudo tailscale up` if Tailscale has not been authenticated yet.
-3. Change the wallpaper in DankMaterialShell if generated colors or theme files look stale.
-4. Open DankMaterialShell settings if the shell uses default layout or theme values after first launch.
+3. Change the wallpaper in the selected desktop shell if generated colors or theme files look stale.
+4. Open the selected desktop shell settings if it uses default layout or theme values after first launch.
 5. Install hardware-specific drivers, optional cursor themes, and any machine-specific secrets separately.
 
 ## Troubleshooting

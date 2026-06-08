@@ -7,29 +7,52 @@ This file keeps the source/target mapping details.
 Managed targets:
 
 ```text
-~/.config/DankMaterialShell/
 ~/.config/fastfetch/
 ~/.config/fish/
 ~/.config/kitty/
-~/.config/matugen/
 ~/.config/niri/
 ~/install.sh
+```
+
+DMS profile only:
+
+```text
+~/.config/DankMaterialShell/
+~/.config/matugen/
 ```
 
 Source paths:
 
 ```text
+.chezmoi.toml.tmpl
 dot_config/DankMaterialShell/
 dot_config/fastfetch/
-dot_config/kitty/
+dot_config/kitty/kitty.conf.tmpl
 dot_config/matugen/
-dot_config/niri/
+dot_config/niri/config.kdl.tmpl
 dot_config/private_fish/
 executable_install.sh
 ```
 
 `dot_config/private_fish/` maps to `~/.config/fish/` and keeps that target
 directory private.
+
+## Machine Profile
+
+`.chezmoi.toml.tmpl` prompts once per machine for `desktop_shell`.
+
+Supported values:
+
+```text
+dms
+noctalia-v4
+noctalia-v5
+none
+```
+
+The Niri and Kitty configs are templates. They keep the shared config intact
+while switching shell-specific autostart commands, IPC binds, generated include
+files, and DMS-only target directories.
 
 ## Generated State
 
@@ -45,7 +68,7 @@ dot_config/matugen/templates/*.toml
 dot_config/DankMaterialShell/plugins/*.meta
 ```
 
-Generated locally:
+DMS-generated locally:
 
 ```text
 ~/.cache/matugen/fastfetch.jsonc

@@ -1,0 +1,5 @@
+{{- $desktopShellChoices := list "dms" "noctalia-v4" "noctalia-v5" "none" -}}
+{{- $desktopShell := promptChoiceOnce . "desktop_shell" "Desktop shell profile" $desktopShellChoices -}}
+
+[data]
+desktop_shell = {{ $desktopShell | quote }}
